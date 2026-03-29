@@ -1,0 +1,54 @@
+{
+  "entities": {
+    "Favorite": {
+      "title": "Favorite Recipe",
+      "description": "A user's favorite recipe for quick selection.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "description": "The name of the dish." },
+        "category": { "type": "string", "enum": ["vegetarisk", "kött", "fisk"], "description": "The type of dish." },
+        "userId": { "type": "string", "description": "The owner of this favorite." }
+      },
+      "required": ["title", "category", "userId"]
+    },
+    "PlanDay": {
+      "title": "Plan Day",
+      "description": "A single day's dinner plan.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "date": { "type": "string", "format": "date", "description": "YYYY-MM-DD" },
+        "source": { "type": "string", "enum": ["web", "favorite"] },
+        "category": { "type": "string", "enum": ["vegetarisk", "kött", "fisk", "valfritt"] },
+        "complexity": { "type": "string", "enum": ["enkelt", "ambitiöst"] },
+        "recipeTitle": { "type": "string" },
+        "recipeUrl": { "type": "string" }
+      },
+      "required": ["userId", "date", "source", "category", "complexity"]
+    },
+    "User": {
+      "title": "User",
+      "description": "A manually added user for login.",
+      "type": "object",
+      "properties": {
+        "username": { "type": "string" },
+        "password": { "type": "string" }
+      },
+      "required": ["username", "password"]
+    }
+  },
+  "firestore": {
+    "/favorites/{favoriteId}": {
+      "schema": "Favorite",
+      "description": "Collection of user favorites."
+    },
+    "/plans/{planId}": {
+      "schema": "PlanDay",
+      "description": "Daily dinner plans."
+    },
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Manual users for login."
+    }
+  }
+}

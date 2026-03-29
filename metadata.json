@@ -1,0 +1,5 @@
+{
+  "name": "Middagskompisen",
+  "description": "En smart middagsplanerare som hjälper dig planera veckans måltider med egna favoriter och förslag från nätet.",
+  "requestFramePermissions": []
+}

@@ -1,0 +1,23 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Custom auth logic: Since we're not using Firebase Auth, we rely on the userId field.
+    // This is a simplified setup for the requested manual login system.
+    
+    // Users collection for login verification
+    match /users/{userId} {
+      allow read: if true; // Allow reading to check credentials
+      allow create: if true; // Allow creating the initial test user
+    }
+
+    // Favorites
+    match /favorites/{favoriteId} {
+      allow read, create, update, delete: if true; // In a real app, we'd use custom claims or Firebase Auth
+    }
+
+    // Plans
+    match /plans/{planId} {
+      allow read, create, update, delete: if true;
+    }
+  }
+}
